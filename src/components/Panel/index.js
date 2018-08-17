@@ -61,7 +61,7 @@ let render = {
       this.isShow = false
       setTimeout(() => {
         this.isActive = false
-      }, 300)
+      }, 400)
     },
     panelMainClick (e) {
       e = e || window.event
