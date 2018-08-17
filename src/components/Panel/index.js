@@ -11,6 +11,7 @@ let render = {
     return {
       // 显示panel
       isShow: false,
+      isActive: false,
       // 进入方向
       panelEnter: 'right',
       // 移出方向
@@ -32,6 +33,8 @@ let render = {
     'outer',
     // 关闭Panel标记
     'closeFlag',
+    // 自定义Class
+    'className',
     // 显示事件
     'onShow',
     // 关闭事件
@@ -46,6 +49,7 @@ let render = {
         }
       }
       this.isShow = true
+      this.isActive = true
     },
     close () {
       let onPanelClose = this.onPanelClose
@@ -55,6 +59,9 @@ let render = {
         }
       }
       this.isShow = false
+      setTimeout(() => {
+        this.isActive = false
+      }, 300)
     },
     panelMainClick (e) {
       e = e || window.event

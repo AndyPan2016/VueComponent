@@ -14,7 +14,7 @@
               :onShow="onShow"
               :onClose="onClose">
               <div slot="panel-content">
-              	  <!-- 通过绑定事件去调用关闭方法进行关闭Panel -->
+                  <!-- 通过绑定事件去调用关闭方法进行关闭Panel -->
                   <a href="javascript:;" @click="closePanel">关闭</a>
               </div>
             </Panel>

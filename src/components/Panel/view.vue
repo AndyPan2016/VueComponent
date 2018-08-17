@@ -6,7 +6,10 @@
 
 <template>
   <div class="ui-panel"
-    :class="(isShow == true ? ' show' : '') + (panelEnter ? ' ' + panelEnter : '')">
+    :class="(isShow == true ? ' show' : '') +
+      (isActive == true ? ' active' : '') +
+      (className ? ' ' + className : '') +
+      (panelEnter ? ' ' + panelEnter : '')">
     <div class="ui-panel-main" @click="panelMainClick">
       <slot name="panel-content"></slot>
     </div>

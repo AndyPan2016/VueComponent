@@ -15,8 +15,10 @@
 	bottom: 0;
 	overflow: hidden;
 	z-index: -1;
+	&.active{
+		z-index: 100
+	}
 	&.show{
-		z-index: 100;
 		.ui-panel-main{
 			background: rgba(255, 255, 255, 1);
 		}
