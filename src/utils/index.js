@@ -14,6 +14,30 @@ module.exports = {
   isFunction (fn) {
     return (fn && typeof (fn) === 'function') ? 1 : 0
   },
+  addClass (target, clas) {
+    if (target && clas) {
+      var className = target.getAttribute('class') || target.className
+      if (className.indexOf(clas) < 0) {
+        target.className += ' ' + clas
+      }
+    }
+  },
+  removeClass (target, clas) {
+    if (target && clas) {
+      var classNameAry = (target.getAttribute('class') || target.className).split(' ')
+      let i = 0
+      let len = classNameAry.length
+      let item
+      let tempClas = []
+      for (; i < len; i++) {
+        item = classNameAry[i]
+        if (item !== clas) {
+          tempClas.push(item)
+        }
+      }
+      target.className = tempClas.join(' ')
+    }
+  },
   hasClass (target, clas) {
     if (target && clas) {
       var classNameAry = (target.getAttribute('class') || target.className).split(' ')

@@ -9,6 +9,7 @@
       <div class="page-body-nav">
         <router-link class="nav-item" :to="{path:'/components/popup'}">Popup</router-link>
         <router-link class="nav-item" :to="{path:'/components/panel'}">Panel</router-link>
+        <router-link class="nav-item" :to="{path:'/components/tabs'}">Tabs</router-link>
       </div>
       <div class="page-body-cont">
         <component v-bind:is="currentComponent"></component>

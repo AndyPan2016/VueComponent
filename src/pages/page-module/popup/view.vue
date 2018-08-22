@@ -199,7 +199,7 @@
         </div>
         <div class="demo-item">
             <!-- downup data -->
-            <span class="demo-item-title">downup(自定义数据-默认样式)：</span>
+            <span class="demo-item-title">downup(自定义数据-默认样式-移动端才有效果)：</span>
             <a class="demo-item-handle" href="javascript:;" v-on:click="openPopUp('downupDataPopup')">open</a>
             <Popup ref="downupDataPopup"
               type="downup"
@@ -208,7 +208,7 @@
         </div>
         <div class="demo-item">
             <!-- downup data -->
-            <span class="demo-item-title">downup(自定义数据-自定义样式)：</span>
+            <span class="demo-item-title">downup(自定义数据-自定义样式-移动端才有效果)：</span>
             <a class="demo-item-handle" href="javascript:;" v-on:click="openPopUp('downupDataCustom1Popup')">open</a>
             <Popup ref="downupDataCustom1Popup"
               type="downup"
@@ -218,7 +218,7 @@
         </div>
         <div class="demo-item">
             <!-- downup data -->
-            <span class="demo-item-title">downup(按钮)：</span>
+            <span class="demo-item-title">downup(按钮-移动端才有效果)：</span>
             <a class="demo-item-handle" href="javascript:;" v-on:click="openPopUp('downupBtnPopup')">open</a>
             <Popup ref="downupBtnPopup"
               type="downup"
@@ -228,7 +228,7 @@
         </div>
         <div class="demo-item">
             <!-- downup data -->
-            <span class="demo-item-title">downup(按钮)：</span>
+            <span class="demo-item-title">downup(按钮-移动端才有效果)：</span>
             <a class="demo-item-handle" href="javascript:;" v-on:click="openPopUp('downupBtnContPopup')">open</a>
             <Popup ref="downupBtnContPopup"
               type="downup"
