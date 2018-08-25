@@ -65,6 +65,9 @@
 				}
 			}
 			&.full{
+				.form-item-lab{
+					width: 100%;
+				}
 				.form-item-txt, .form-item-inp{
 					display: block;
 					position: relative;
@@ -82,11 +85,14 @@
 
 
 			.form-item-lab{
+				width: 50%;
 				float: left;
 				height: @lineHeight;
 				line-height: @lineHeight;
 				font-size: 14px;
 				color: #666;
+				.text-overflow();
+				text-align: left;
 			}
 			.form-item-txt{
 				line-height: @lineHeight;

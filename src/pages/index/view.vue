@@ -5,7 +5,7 @@
 -->
 
 <template>
-    <div class="page-main">
+    <div class="page-main" :class="isMobile ? 'page-main-mobile' : ''">
         <Header />
         <BodyComp :components="type" />
         <Footer />

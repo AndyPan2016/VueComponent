@@ -14,11 +14,30 @@
   right: 0;
   bottom: @footerHeight;
 
+  .tools{
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    display: inline-block;
+    background: #389ffe;
+    font-size: 12px;
+    color: #FFF;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    .border-radius(30px);
+    z-index: 10;
+    text-decoration: none;
+    outline: none;
+  }
+
   .page-body-nav{
   	width: @bodyRight;
   	float: left;
   	height: 100%;
   	overflow-y: auto;
+    .transition(all .3s ease);
   	.nav-item{
   		display: inline-block;
   		width: 100%;
@@ -45,5 +64,25 @@
   	bottom: 0;
   	left: @bodyRight;
     overflow-y: auto;
+  }
+}
+
+
+.page-main-mobile{
+  .page-body{
+    top: 0;
+    bottom: 0;
+    .page-body-nav{
+      margin-left: -@bodyRight;
+      position: relative;
+      z-index: 9;
+      background: #FFF;
+      &.active{
+        margin-left: 0;
+      }
+    }
+    .page-body-cont{
+      left: 0;
+    }
   }
 }

@@ -12,9 +12,13 @@ import PageCheckBox from '@/pages/page-module/checkbox/view.vue'
 import PageSwitchBox from '@/pages/page-module/switchbox/view.vue'
 import PageForm from '@/pages/page-module/form/view.vue'
 
+import utils from '@/utils'
+
 let render = {
   data () {
     return {
+      isMobild: false,
+      navStatus: false,
       componentsMap: {
         popup: PagePopup,
         panel: PagePanel,
@@ -27,7 +31,11 @@ let render = {
     }
   },
   props: ['components'],
-  methods: {},
+  methods: {
+    clickMenu () {
+      this.navStatus = !this.navStatus
+    }
+  },
   computed: {},
   watch: {
     '$route' (to, from) {
@@ -37,6 +45,8 @@ let render = {
   },
   created () {
     this.currentComponent = this.componentsMap[this.components] || Welcome
+
+    this.isMobile = utils.isMobile()
   }
 }
 

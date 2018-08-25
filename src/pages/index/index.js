@@ -8,9 +8,12 @@ import Header from '@/pages/block-module/header/view.vue'
 import BodyComp from '@/pages/block-module/body/view.vue'
 import Footer from '@/pages/block-module/footer/view.vue'
 
+import utils from '@/utils'
+
 let render = {
   data () {
     return {
+      isMobild: false,
       type: this.$route.params['type']
     }
   },
@@ -21,7 +24,9 @@ let render = {
     BodyComp,
     Footer
   },
-  created () {}
+  created () {
+    this.isMobile = utils.isMobile()
+  }
 }
 
 export {

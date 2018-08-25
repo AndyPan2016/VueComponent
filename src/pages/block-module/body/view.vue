@@ -6,7 +6,8 @@
 
 <template>
     <div class="page-body">
-      <div class="page-body-nav">
+      <a href="javascript:;" v-if="isMobile" class="tools" @click="clickMenu">菜单</a>
+      <div class="page-body-nav" :class="navStatus ? 'active' : ''">
         <router-link class="nav-item" :to="{path:'/components/popup'}">Popup</router-link>
         <router-link class="nav-item" :to="{path:'/components/panel'}">Panel</router-link>
         <router-link class="nav-item" :to="{path:'/components/tabs'}">Tabs</router-link>
