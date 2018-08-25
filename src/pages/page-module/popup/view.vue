@@ -154,7 +154,7 @@
         </div>
         <div class="demo-item">
             <!-- downup -->
-            <span class="demo-item-title">downup(自定义内容模板)：</span>
+            <span class="demo-item-title">downup(自定义内容模板-移动端才有效果)：</span>
             <a class="demo-item-handle" href="javascript:;" v-on:click="openPopUp('downupPopup')">open</a>
             <Popup ref="downupPopup" type="downup" :content="false" title="由下往上弹出(自定义内容模板)">
               <div slot="popup-content">
