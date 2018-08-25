@@ -8,6 +8,8 @@ import Welcome from '@/pages/block-module/welcome/view.vue'
 import PagePopup from '@/pages/page-module/popup/view.vue'
 import PagePanel from '@/pages/page-module/panel/view.vue'
 import PageTabs from '@/pages/page-module/tabs/view.vue'
+import PageCheckBox from '@/pages/page-module/checkbox/view.vue'
+import PageSwitchBox from '@/pages/page-module/switchbox/view.vue'
 
 let render = {
   data () {
@@ -15,7 +17,9 @@ let render = {
       componentsMap: {
         popup: PagePopup,
         panel: PagePanel,
-        tabs: PageTabs
+        tabs: PageTabs,
+        checkbox: PageCheckBox,
+        switch: PageSwitchBox
       },
       currentComponent: Welcome
     }

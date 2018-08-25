@@ -1,0 +1,39 @@
+@charset "UTF-8";
+/**
+ * Switch Less
+ * @authors AndyPan (pye-mail@163.com)
+ * @date    2018年8月25日14:53:04;
+ */
+
+@import "../../less/commons/_mixins.less";
+
+.ui-switchbox{
+	display: inline-block;
+	width: 0.8rem;
+	height: 0.40rem;
+	border: 0.02rem solid #cdcdcd;
+	background: #FFF;
+	.border-radius(0.5rem);
+	.transition(all .3s ease);
+
+	&:after{
+		content: '';
+		display: inline-block;
+		width: 0.4rem;
+		height: 0.41rem;
+		background: #cdcdcd;
+		float: left;
+		margin-left: 0;
+		.border-radius(0.5rem);
+		.transition(all .3s ease);
+	}
+
+	&.active{
+		border: 0.02rem solid #389ffe;
+		background: #cde7ff;
+		&:after{
+			background: #389ffe;
+			margin-left: .4rem;
+		}
+	}
+}
