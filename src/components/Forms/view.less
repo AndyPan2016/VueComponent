@@ -1,16 +1,120 @@
 @charset "UTF-8";
 /**
- * 组件级 Less
+ * 表单元素及验证 Less
  * @authors AndyPan (pye-mail@163.com)
- * @date    2018-06-08 10:41:22
+ * @date    2018年8月25日16:14:44;
  */
 
-.temp-wrap{
-  border: 1px solid #F00;
+@import "../../less/commons/_mixins.less";
 
-  a{
-    text-decoration: none;
-    font-size: 24px;
-    color: #f00;
-  }
+.ui-form{
+	.ui-form-block{
+		background: #FFF;
+		padding: 0 10px;
+		margin-bottom: 10px;
+
+		&.no-bg{
+			background: transparent;
+		}
+		&.no-margin{
+			margin: 0;
+		}
+		
+		@lineHeight: 40px;
+		.ui-form-item{
+			min-height: @lineHeight;
+			border-bottom: 1px solid #eee;
+			position: relative;
+
+			&.no-border, &:last-child{
+				border: none;
+			}
+			&.choose{
+				cursor: pointer;
+				&:after{
+					content: '';
+					display: inline-block;
+					width: 20px;
+					height: 100%;
+					position: absolute;
+					right: 0;
+					top: 0;
+					background: url(./images/icon-arrow.png) right center no-repeat;
+					background-size: 8px
+				}
+				.form-item-txt, .form-item-inp{
+					right: 20px;
+					input{
+						cursor: pointer;
+					}
+				}
+			}
+			&.title{
+				font-weight: bold;
+				padding-left: 15px;
+				&:before{
+					content: '';
+					display: inline-block;
+					width: 4px;
+					height: 50%;
+					background: #33CCFF;
+					position: absolute;
+					top: 50%;
+					margin-top: -(@lineHeight / 4);
+					left: 0;
+				}
+			}
+			&.full{
+				.form-item-txt, .form-item-inp{
+					display: block;
+					position: relative;
+					width: 100%;
+					left: 0;
+					text-align: left;
+					height: initial;
+					min-height: @lineHeight;
+
+					input, textarea{
+						text-align: left;
+					}
+				}
+			}
+
+
+			.form-item-lab{
+				float: left;
+				height: @lineHeight;
+				line-height: @lineHeight;
+				font-size: 14px;
+				color: #666;
+			}
+			.form-item-txt{
+				line-height: @lineHeight;
+			}
+			.form-item-txt, .form-item-inp{
+				position: absolute;
+				top: 0;
+				right: 0;
+				left: 50%;
+				height: @lineHeight;
+				font-size: 14px;
+				color: #666;
+				text-align: right;
+				.text-overflow();
+			}
+			.form-inp{
+				width: 100%;
+				height: @lineHeight - 2px;
+				text-align: right;
+				border: none;
+				outline: none;
+				background: transparent;
+				.placeholder(#ccc, 14px, '微软雅黑')
+			}
+			textarea.form-inp{
+				height: 3 * @lineHeight;
+				resize: none;
+			}
+		}
+	}
 }

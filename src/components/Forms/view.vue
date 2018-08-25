@@ -1,15 +1,13 @@
 <!--
- * 页面视图 Vue
+ * 表单元素及验证 Vue
  * @authors AndyPan (pye-mail@163.com)
- * @date    2018-06-08 10:40:52
+ * @date    2018年8月25日16:15:09
 -->
 
 <template>
-    <div class="temp-wrap">
-        <a href="javascript:;" @click="click">click me</a>
-        <slot></slot>
-        123 {{text}}
-    </div>
+  <form action="" class="ui-form">
+    <slot name="form-block"></slot>
+  </form>
 </template>
 
 <script>

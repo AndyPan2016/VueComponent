@@ -12,6 +12,7 @@
         <router-link class="nav-item" :to="{path:'/components/tabs'}">Tabs</router-link>
         <router-link class="nav-item" :to="{path:'/components/checkbox'}">CheckBox</router-link>
         <router-link class="nav-item" :to="{path:'/components/switch'}">Switch</router-link>
+        <router-link class="nav-item" :to="{path:'/components/form'}">Form</router-link>
       </div>
       <div class="page-body-cont">
         <component v-bind:is="currentComponent"></component>

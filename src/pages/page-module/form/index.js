@@ -1,8 +1,10 @@
 /**
- * 表单元素及验证 JavaScript
+ * Forms JavaScript
  * @authors AndyPan (pye-mail@163.com)
- * @date    2018年8月25日16:14:13
+ * @date    2018年8月25日16:11:22
  */
+
+import Forms from '@/components/Forms/view.vue'
 
 let render = {
   data () {
@@ -12,6 +14,7 @@ let render = {
   methods: {
   },
   components: {
+    Forms
   },
   created () {
   }

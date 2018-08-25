@@ -10,6 +10,7 @@ import PagePanel from '@/pages/page-module/panel/view.vue'
 import PageTabs from '@/pages/page-module/tabs/view.vue'
 import PageCheckBox from '@/pages/page-module/checkbox/view.vue'
 import PageSwitchBox from '@/pages/page-module/switchbox/view.vue'
+import PageForm from '@/pages/page-module/form/view.vue'
 
 let render = {
   data () {
@@ -19,7 +20,8 @@ let render = {
         panel: PagePanel,
         tabs: PageTabs,
         checkbox: PageCheckBox,
-        switch: PageSwitchBox
+        switch: PageSwitchBox,
+        form: PageForm
       },
       currentComponent: Welcome
     }
