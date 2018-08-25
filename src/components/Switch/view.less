@@ -8,32 +8,36 @@
 @import "../../less/commons/_mixins.less";
 
 .ui-switchbox{
+	@W: 40px;
+	@H: 20px;
 	display: inline-block;
-	width: 0.8rem;
-	height: 0.40rem;
-	border: 0.02rem solid #cdcdcd;
+	width: @W;
+	height: @H;
+	border: 1px solid #cdcdcd;
 	background: #FFF;
-	.border-radius(0.5rem);
+	.border-radius(@H);
 	.transition(all .3s ease);
+	outline: none;
+	text-decoration: none;
 
 	&:after{
 		content: '';
 		display: inline-block;
-		width: 0.4rem;
-		height: 0.41rem;
+		width: @H;
+		height: @H;
 		background: #cdcdcd;
 		float: left;
 		margin-left: 0;
-		.border-radius(0.5rem);
+		.border-radius(@H);
 		.transition(all .3s ease);
 	}
 
 	&.active{
-		border: 0.02rem solid #389ffe;
+		border: 1px solid #389ffe;
 		background: #cde7ff;
 		&:after{
 			background: #389ffe;
-			margin-left: .4rem;
+			margin-left: (@W - @H);
 		}
 	}
 }
