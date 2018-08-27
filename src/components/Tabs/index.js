@@ -99,6 +99,10 @@ let render = {
       this.winResize()
       document.onresize = this.winResize
     }
+    setTimeout(()=>{
+      let slotHd = this.$slots['tabs-hd']
+      slotHd[0].elm.click()
+    }, 0)
   }
 }
 
