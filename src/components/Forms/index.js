@@ -63,7 +63,9 @@ let render = {
     // 表单某个元素验证失败时是否中断后面元素的验证
     'isFailureBreak',
     // 自定义class
-    'className'
+    'className',
+    // 自定义验证类型
+    'verifyType'
   ],
   methods: {
     verify () {
@@ -102,6 +104,7 @@ let render = {
 
               }
             } else if (nodeName === 'select') {
+              result = this.verifyTarget(target, verifyValue)
             } else if (nodeName === 'textarea') {
               result = this.verifyTarget(target, verifyValue)
             }
@@ -181,6 +184,14 @@ let render = {
   created () {
     // 表单某个元素验证失败时是否中断后面元素的验证，默认为true.中断
     this.isVeriyfFailureBreak = this.isFailureBreak !== undefined ? this.isFailureBreak : true
+    // 自定义验证类型
+    let verifyType = this.verifyType
+    if (verifyType) {
+      this.type = this.type || {}
+      for (let key in verifyType) {
+        this.type[key] = verifyType[key]
+      }
+    }
   },
   mounted () {
     let slotFormBlock = this.$slots['form-block']

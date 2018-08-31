@@ -11,6 +11,7 @@ import PageTabs from '@/pages/page-module/tabs/view.vue'
 import PageCheckBox from '@/pages/page-module/checkbox/view.vue'
 import PageSwitchBox from '@/pages/page-module/switchbox/view.vue'
 import PageForm from '@/pages/page-module/form/view.vue'
+import PageTouch from '@/pages/page-module/touch/view.vue'
 
 import utils from '@/utils'
 
@@ -25,7 +26,8 @@ let render = {
         tabs: PageTabs,
         checkbox: PageCheckBox,
         switch: PageSwitchBox,
-        form: PageForm
+        form: PageForm,
+        touch: PageTouch
       },
       currentComponent: Welcome
     }

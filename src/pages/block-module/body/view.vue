@@ -14,6 +14,7 @@
         <router-link class="nav-item" :to="{path:'/components/checkbox'}">CheckBox</router-link>
         <router-link class="nav-item" :to="{path:'/components/switch'}">Switch</router-link>
         <router-link class="nav-item" :to="{path:'/components/form'}">Form</router-link>
+        <router-link class="nav-item" :to="{path:'/components/touch'}">Touch</router-link>
       </div>
       <div class="page-body-cont">
         <component v-bind:is="currentComponent"></component>

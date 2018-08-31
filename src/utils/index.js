@@ -11,8 +11,18 @@ module.exports = {
   isFalse (attr) {
     return (attr === false || attr === 'false') ? 1 : 0
   },
+  isString (str) {
+    return (str && typeof (str) === 'string') ? 1 : 0
+  },
   isFunction (fn) {
     return (fn && typeof (fn) === 'function') ? 1 : 0
+  },
+  isArray (ary) {
+    try {
+      return Object.prototype.toString.call(ary) === "[object Array]"
+    } catch (e) {
+      return false
+    }
   },
   addClass (target, clas) {
     if (target && clas) {
