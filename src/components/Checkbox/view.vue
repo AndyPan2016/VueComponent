@@ -5,9 +5,10 @@
 -->
 
 <template>
-  <span class="ui-checkbox"
-    :class="(className ? className : '') + (isActive ? ' active' : '')"
-    @click="chkBoxClick">
+  <span
+    :class="('ui-' + (chkType)) + (className ? ' '+className : '') + (isActive ? ' active' : '')"
+    @click="chkBoxClick" ref="myBox" :name="name">
+    <span class="box-status" v-if="type == 'radio'"></span>
     {{chkText}}
     <slot name="checkbox-text"></slot>
   </span>

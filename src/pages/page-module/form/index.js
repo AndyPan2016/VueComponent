@@ -12,6 +12,12 @@ let render = {
     }
   },
   methods: {
+    verifyFailureEvent (verifyValue, result) {
+      console.info(result)
+    },
+    formVerifySuccessEvent (myFormData) {
+      console.info(myFormData)
+    }
   },
   components: {
     Forms

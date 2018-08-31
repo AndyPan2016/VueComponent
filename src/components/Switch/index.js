@@ -35,7 +35,7 @@ let render = {
       if (utils.isFunction(onSwitchBefore)) {
         let result = onSwitchBefore.call(target, e, () => {
           this.isActive = !this.isActive
-        }, dataId)
+        }, this.isActive, dataId)
         if (result === false) {
           return
         }

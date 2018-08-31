@@ -5,7 +5,9 @@
 -->
 
 <template>
-  <form action="" class="ui-form">
+  <form action="" class="ui-form"
+    :class="className"
+    @click="formClick">
     <slot name="form-block"></slot>
   </form>
 </template>

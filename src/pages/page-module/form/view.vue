@@ -1,16 +1,19 @@
 <template>
 <div class="page-main-form">
-  <Forms ref="refForms">
+  <Forms ref="refForms"
+    className="test-form"
+    :onVerifyFailure="verifyFailureEvent"
+    :onFormVerifySuccess="formVerifySuccessEvent">
 
     <div slot="form-block" class="ui-form-block">
       <div class="ui-form-item">
         <span class="form-item-lab">用户名</span>
-        <span class="form-item-txt">张三三</span>
+        <span class="form-item-txt j-verify request" data-key="name1" data-value="abc">张三三</span>
       </div>
       <div class="ui-form-item">
-        <span class="form-item-lab">用户名</span>
+        <span class="form-item-lab">数字</span>
         <span class="form-item-inp">
-          <input type="text" class="form-inp" placeholder="请输入用户名" />
+          <input type="text" class="form-inp j-verify request number" placeholder="请输入数字" data-key="number" />
         </span>
       </div>
       <div class="ui-form-item choose">
@@ -104,6 +107,12 @@
         <span class="form-item-inp">
           <textarea class="form-inp" placeholder="文本域"></textarea>
         </span>
+      </div>
+    </div>
+
+    <div slot="form-block" class="ui-form-block">
+      <div class="ui-form-item full">
+        <a href="javascript:;" class="j-verify-submit">验证</a>
       </div>
     </div>
   </Forms>
