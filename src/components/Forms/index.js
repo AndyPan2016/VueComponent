@@ -30,26 +30,70 @@ let render = {
       // 验证类型
       type: {
         // 必填
-        'request': function (value) {
-          if (!value) {
-            return {status: false, message: '必填'}
+        'request': function (value, fn) {
+          let target = this
+          let targetType = target.type || target.getAttribute('type')
+          let customMsg = fn.getMsg(target, 'request')
+
+          let result = {status: true, message: customMsg.success || 'success'}
+
+          if (targetType == 'radio' || targetType == 'checkbox') {
+            result = fn.checkBoxVerify(target) || result
           } else {
-            return {status: true, message: 'success'}
+            if (!value) {
+              result = {
+                status: false, 
+                message: customMsg.error || '必填'
+              }
+            }
           }
+
+          return result
         },
+        // 银行卡号
+        'bank-number': {regular: /^([1-9]{1})(\d{14}|\d{18})$/, remark: '请输入正确的银行卡号'},
         // 手机
         // 11位数字，以1开头
-        'phone': {regular: /^1\d{10}$/, message: '手机号码格式不正确'},
+        'phone': {regular: /^1\d{10}$/, remark: '手机号码格式不正确'},
         // 座机
         // 验证规则：区号+号码，区号以0开头，3位或4位，号码由7位或8位数字组成，区号与号码之间可以无连接符，也可以“-”连接
-        'telphone': {regular: /^0\d{2,3}-?\d{7,8}$/, message: '座机号码格式不正确'},
+        'telphone': {regular: /^0\d{2,3}-?\d{7,8}$/, remark: '座机号码格式不正确'},
+        // 字母
         'letters': { regular: /^[A-Za-z]+$/, remark: '只能为字母' },
+        // 正整数
         'int': { regular: /^[1-9]*[1-9][0-9]*$/, remark: '请输入正整数' },
+        // 非零的正整数
+        'non-zero-plus': {regular: /^\+?[1-9][0-9]*$/, remark: '非零的正整数'},
+        // 非零的负整数
+        'non-zero-minus': {regular: /^\-?[1-9][0-9]*$/, remark: '非零的负整数'},
+        // 正整数 + 0
+        'non-minus': {regular: /^\d+$/, remark: '非负整数（正整数 + 0）'},
+        // 负整数 + 0
+        'non-plus': {regular: /^((-\d+)|(0+))$/, remark: '非正整数（负整数 + 0）'},
+        // 数字
         'number': { regular: /^-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?$/, remark: '请输入数字' },
+        // 六位数字
+        'number-6': {regular: /^\d{6}$/, remark: '六位数字'},
+        // 至少六位数字
+        'number-min-6': {regular: /^\d{6,}$/, remark: '至少六位数字'},
+        // 六至十八位数字
+        'number-6-18': {regular: /^\d{6,18}$/, remark: '六至十八位数字'},
+        // 邮件
         'email': { regular: /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/, remark: '请输入正确的邮件' },
+        // 浮点数(两位有效数字)
         'float2': { regular: /^(-?\d+)(\.\d{1,2})?$/, remark: '请输入浮点数(两位有效数字)' },
+        // 非空且保留一位小数
         'not-null-Float1': { regular: /^[0-9]+(\.[0-9]{1})?$/, remark: '非空且保留一位小数' },
-        'not-null-Float2': { regular: /^\\d{1,8}\\.{0,1}(\\d{1,2})?$/, remark: '非空且保留两位小数' }
+        // 非空且保留两位小数
+        'not-null-Float2': { regular: /^\\d{1,8}\\.{0,1}(\\d{1,2})?$/, remark: '非空且保留两位小数' },
+        // 判断日期类型是否为YYYY-MM-DD格式的类型
+        'date': {regular: /^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2})$/, remark: '日期格式不正确'},
+        // 判断日期类型是否为YYYY-MM-DD hh:mm:ss格式的类型
+        'date-time': {regular: /^(\d{1,4})(-|\/)(\d{1,2})\2(\d{1,2}) (\d{1,2}):(\d{1,2}):(\d{1,2})$/, remark: '日期时间格式不正确'},
+        // 判断日期类型是否为hh:mm:ss格式的类型
+        'time': {regular: /^((20|21|22|23|[0-1]\d)\:[0-5][0-9])(\:[0-5][0-9])?$/, remark: '时间格式不正确'},
+        // 判断输入的字符是否为中文
+        'chinese': {regular: /^[\u0391-\uFFE5]+$/, remark: '只能为中文'}
       }
     }
   },
@@ -68,6 +112,69 @@ let render = {
     'verifyType'
   ],
   methods: {
+    getMsg (target, key) {
+      let errorMsg
+      if (key == 'request') {
+        errorMsg = target.getAttribute('data-request-msg') || target.getAttribute('placeholder')
+      } else {
+        errorMsg = target.getAttribute('data-error-msg')
+      }
+      let successMsg = target.getAttribute('data-success-msg')
+      return {error: errorMsg, success: successMsg}
+    },
+    checkBoxVerify (target) {
+      let formTargets = fn.formTargets || []
+      let i = 0
+      let lenI = formTargets.length
+      let formTarget
+
+      let result = undefined
+      let boxAry = []
+      let boxFirst
+      let flag = 0
+      let targetName = target.name || target.getAttribute('name')
+      for (; i < lenI; i++) {
+        formTarget = formTargets[i]
+        if ((formTarget.name || formTarget.getAttribute('name')) == targetName) {
+          // 保存同组（name相同）元素
+          boxAry.push(formTarget)
+          // 保存第一个元素，先关属性从第一个元素上获取
+          if (!boxFirst) {
+            boxFirst = formTarget
+          }
+          // 获取选中个数
+          if (formTarget.checked) {
+            flag ++
+          }
+        }
+      }
+      if (flag <= 0) {
+        result = {
+          status: false, 
+          message: customMsg.error || '必选'
+        }
+      } else {
+        //如果有选中的项，再验证选中项个数限制
+        var minLength = target.getAttribute('minlength'),
+            maxLength = target.getAttribute('maxlength');
+        //长度判断
+        if (minLength) {
+            minLength = parseInt(minLength);
+            if (flag < minLength) {
+                result.status = false;
+                result.message = '至少需要选择#MIN#项'.replace('#MIN#', minLength);
+            }
+        }
+        if (maxLength) {
+            maxLength = parseInt(maxLength);
+            if (flag > maxLength) {
+                result.status = false;
+                result.message = '最多只能选择#MAX#项'.replace('#MAX#', maxLength);
+            }
+        }
+      }
+      return result
+    },
     verify () {
       // 验证前清空表单数据对象
       this.myFormData = {}
@@ -96,23 +203,14 @@ let render = {
           if (isMatch > -1) {
             // 指定验证元素类型
             verifyValue = target.value
-            if (nodeName === 'input') {
-              let targetType = target.type || target.getAttribute('type')
-              if (targetType === 'text' || targetType === 'password') {
-                result = this.verifyTarget(target, verifyValue)
-              } else if (targetType === 'radio' || targetType === 'checkbox') {
-
-              }
-            } else if (nodeName === 'select') {
-              result = this.verifyTarget(target, verifyValue)
-            } else if (nodeName === 'textarea') {
-              result = this.verifyTarget(target, verifyValue)
-            }
+            result = this.verifyTarget(target, verifyValue)
+            
           } else {
             // 非指定验证元素类型，验证data-value
             verifyValue = target.getAttribute(verifyAttr.dataValue)
             result = this.verifyTarget(target, verifyValue)
           }
+
           if (dataKey) {
             // 保存表单数据
             this.myFormData[dataKey] = verifyValue
@@ -152,21 +250,24 @@ let render = {
       let result = { status: true, message: 'success' }
       let verifyType = this.type
       let type
+      let customMsg
       for (let key in verifyType) {
         if (utils.hasClass(target, key)) {
           type = verifyType[key]
+          customMsg = this.getMsg(target, key)
           if (type) {
             if (utils.isFunction(type)) {
-              result = type.call(target, verifyValue)
+              result = type.call(target, verifyValue, this)
             } else {
               result.status = new RegExp(type['regular']).test(verifyValue)
-              result.message = result.status ? 'success' : type['remark']
+              result.message = result.status ? (customMsg.success || 'success') : (customMsg.error || type['remark'])
             }
-          } else {
-            result = { status: false, message: '未指定验证规则' }
           }
 
-          if (!result.status) break
+          if (!result.status) {
+            target.focus()
+            break
+          }
         }
       }
       return result
@@ -196,7 +297,7 @@ let render = {
   mounted () {
     let slotFormBlock = this.$slots['form-block']
     this.myForm = slotFormBlock[0] ? slotFormBlock[0].elm.parentNode : undefined
-    this.formTargets = this.myForm.querySelectorAll('.' + this.verifyFlag)
+    this.formTargets = this.myForm ? this.myForm.querySelectorAll('.' + this.verifyFlag) : []
   }
 }
 

@@ -16,7 +16,9 @@ let render = {
       // 选项卡自定义高度
       tabHeight: 'auto',
       // resize
-      isResize: true
+      isResize: true,
+      tabBdItemW: 'auto',
+      marginLeft: 0
     }
   },
   props: [
@@ -27,7 +29,11 @@ let render = {
     // 自定义高度
     'height',
     // 切换事件
-    'onSwitch'
+    'onSwitch',
+    // 切换到第idx个
+    'activeIdx',
+    //切换动画
+    'switchAnimation'
   ],
   methods: {
     tabSwitchClick (e) {
@@ -40,7 +46,7 @@ let render = {
         let h = 0
         let lenCN = childNodes.length
         let child
-        for (; h < lenCN; h++) {
+        for(; h < lenCN; h++) {
           child = childNodes[h]
           if (utils.hasClass(child, 'active')) {
             utils.removeClass(child, 'active')
@@ -64,13 +70,15 @@ let render = {
         let thisBdChild
         for (; j < lenBdCN; j++) {
           bdChild = bdChildNodes[j]
-          if (j === idx) {
+          if (j == idx) {
             thisBdChild = bdChild
             utils.addClass(bdChild, 'active')
-          } else {
+          }
+          else {
             utils.removeClass(bdChild, 'active')
           }
         }
+        this.marginLeft = -this.tabBdItemW * idx
 
         // 响应切换事件
         let onSwitch = this.onSwitch
@@ -86,6 +94,14 @@ let render = {
       if (isResize) {
         let winHeight = document.body.offsetHeight
         this.tabHeight = winHeight + 'px'
+        let slotBd = this.$slots['tabs-bd']
+        if (this.switchAnimation == true) {
+          this.tabBdItemW = this.tabWidth == 'auto' ? document.body.offsetWidth : slotBd[0].elm.parentNode.parentNode.offsetWidth
+          slotBd[0].elm.parentNode.style.width = (this.tabBdItemW * slotBd.length) + 'px'
+        }
+        slotBd.forEach((item, idx) => {
+          item.elm.style.width = this.tabBdItemW !== 'auto' ? (this.tabBdItemW + 'px') : '100%'
+        })
       }
     }
   },
@@ -95,18 +111,23 @@ let render = {
 
     if (this.tabHeight !== 'auto') {
       this.isResize = false
-    } else {
-      this.winResize()
+    }
+    else {
       document.onresize = this.winResize
     }
-    // setTimeout(() => {
+    // setTimeout(()=>{
     //   let slotHd = this.$slots['tabs-hd']
-    //   slotHd[0].elm.click()
+    //   let activeIdx = this.activeIdx || 0
+    //   slotHd[activeIdx].elm.click()
     // }, 0)
   },
   mounted () {
-    let slotHd = this.$slots['tabs-hd']
-    slotHd[0].elm.click()
+    setTimeout(()=>{
+      this.winResize()
+      let slotHd = this.$slots['tabs-hd']
+      let activeIdx = this.activeIdx || 0
+      slotHd[activeIdx].elm.click()
+    }, 100)
   }
 }
 

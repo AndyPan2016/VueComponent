@@ -6,13 +6,15 @@
 
 <template>
   <div class="ui-tabs"
-    :style="(tabHeight !== 'auto' ? 'height:' + tabHeight + ';' : '') + (tabWidth !== 'auto' ? 'width:' + tabWidth : '')"
-    :class="(className ? className : '')">
+    :style="(tabHeight !== 'auto' ? 'height:' + tabHeight + ';' : '') + (tabWidth !== 'auto' ? 'width:' + tabWidth : '')" 
+    :class="(className ? className : '') + (switchAnimation ? ' switch-animation' : '')">
     <div class="ui-tabs-hd" @click="tabSwitchClick">
       <slot name="tabs-hd"></slot>
     </div>
     <div class="ui-tabs-bd">
-      <slot name="tabs-bd"></slot>
+      <div class="tabs-bd-wrap" :style="'margin-left: ' + marginLeft + 'px;'">
+        <slot name="tabs-bd"></slot>
+      </div>
     </div>
   </div>
 </template>
